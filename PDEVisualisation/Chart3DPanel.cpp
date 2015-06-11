@@ -92,7 +92,7 @@ void SettingsBox::updateDensityBox(double maxDensity)
 {
 	for (int i = 0; i < stepsArraySize; i++)
 	{
-		if (possibleStepSizes[i] <= maxDensity)
+		if (possibleStepSizes[i] >= maxDensity)
 		{
 			densityBox_->addItem(std::to_string(possibleDensities[i]));		
 		}	
