@@ -3,6 +3,7 @@
 
 #include "../PDESolver/PBspSurf.h"
 #include "../PDESolver/PBspVol.h"
+#include "headers.h"
 
 #include <Wt/WAbstractTableModel>
 #include <Wt/WStandardItemModel>
@@ -20,33 +21,35 @@ private:
 	const double xStart_, yStart_, step_;
 };
 
-class SurfaceData2 : public WStandardItemModel
-{
-public:
-	SurfaceData2(FBspSurf& surf, unsigned nbXpts, unsigned nbYpts, WObject *parent = 0);
-
-	boost::any data(const WModelIndex& index, int role = DisplayRole) const;
-private:
-	Matrix<double> data_;
-	const double xStart_, xEnd_, yStart_, yEnd_, xStep_, yStep_;
-};
-
 class VolumeData : public Wt::WStandardItemModel {
 public:
-	VolumeData(Matrix3D<Point1D> points, double xStart, double yStart, double zStart, double step, Wt::WObject *parent = 0);
+	//VolumeData(Matrix3D<Point1D> points, double xStart, double yStart, double zStart, double step, Limits limits, Wt::WObject *parent = 0);
+	VolumeData(ChartData& chartData, WObject *parent = 0);
 	virtual ~VolumeData();
 	boost::any data(const Wt::WModelIndex& index,
 		int role = Wt::DisplayRole) const;
 	double getMin() { return min_; };
 	double getMax() { return max_; };
+	void setXRate(DisplayRate rate) { xRate_ = rate; };
+	void setYRate(DisplayRate rate) { yRate_ = rate; };
+	void setZRate(DisplayRate rate) { zRate_ = rate; };
+	void setPointSize(short size) { pointSize_ = size; };
+	void setSkippedPointSize(short size) { skippedPointSize_ = size; };
+	void setLimits(Limits limits) { limits_ = limits; };
 private:
 	void findMinAndMax();
+	bool checkXLimits(double x) const;
+	bool checkYLimits(double y) const;
+	bool checkZLimits(double z) const;
 
-	const unsigned nbPts_;
+	const unsigned xSize_, ySize_, zSize_;
 	const double xStart_, yStart_, zStart_, step_;
 	double min_, max_;
+	short pointSize_, skippedPointSize_;
+	DisplayRate xRate_, yRate_, zRate_;
 	Matrix3D<Point1D> points_;
 	Chart::WStandardColorMap *colorMap_;
+	Limits limits_;
 };
 
 #endif

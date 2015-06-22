@@ -22,5 +22,15 @@
 	width: 1300px !important;
 }
 
+.slider-text {
+	height: 50px;
+	width: 40px;
+	float: left;
+}
+
+.Wt-slider-h {
+	float: left;
+}
+
 
 

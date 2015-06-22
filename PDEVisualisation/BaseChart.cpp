@@ -84,11 +84,12 @@ void BaseChart::addScatterDataset(WAbstractItemModel *model, double min, double 
 	this->clearDatasets();
 
 	WScatterData *scatter = new WScatterData(model);
-	scatter->setPointSize(7);
+	//scatter->setPointSize(7);
 
 	WStandardColorMap *colorMap = new WStandardColorMap(min, max, true);
 	scatter->setColorMap(colorMap);
 	scatter->setColorColumn(3);
+	scatter->setSizeColumn(4);
 
 	this->addDataSeries(scatter);
 	scatter->setColorMapVisible(true);

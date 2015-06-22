@@ -45,6 +45,7 @@ void Chart2DPanel::update(ChartData& chartData)
 {
 	chartData_ = chartData;
 	slicePicker_->update(chartData);
+	redrawCharts(Dimension::U, chartData.xStart);
 	AbstractPanel::update(chartData);
 }
 
