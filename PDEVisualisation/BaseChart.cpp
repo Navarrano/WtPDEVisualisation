@@ -3,6 +3,7 @@
 #include <Wt/WCssDecorationStyle>
 #include <Wt/Chart/WStandardColorMap>
 #include <Wt/Chart/WScatterData>
+#include <Wt/WPainter>
 
 BaseChart::BaseChart(WContainerWidget *parent) : WCartesian3DChart(ScatterPlot, parent)
 {
@@ -10,6 +11,7 @@ BaseChart::BaseChart(WContainerWidget *parent) : WCartesian3DChart(ScatterPlot, 
 	Wt::WCssDecorationStyle style;
 	style.setBorder(Wt::WBorder(Wt::WBorder::Solid, Wt::WBorder::Medium,
 		Wt::black));
+	style.setForegroundColor(Wt::WColor(232,73,12));
 	this->setDecorationStyle(style);
 
 	this->setGridEnabled(Wt::Chart::XY_Plane, Wt::Chart::XAxis_3D, true);
@@ -36,7 +38,7 @@ BaseChart::BaseChart(WContainerWidget *parent) : WCartesian3DChart(ScatterPlot, 
 	this->setPerspectiveView();
 }
 
-void BaseChart::addDataset(WAbstractItemModel *model, bool meshEnabled)
+WGridData* BaseChart::addDataset(WAbstractItemModel *model, bool meshEnabled)
 {
 	this->clearDatasets();
 
@@ -50,6 +52,8 @@ void BaseChart::addDataset(WAbstractItemModel *model, bool meshEnabled)
 
 	gridData_->setColorMapVisible(true);
 	gridData_->setColorMapSide(Left);
+
+	return gridData_;
 }
 
 void BaseChart::changeAxisTitles(Dimension sliceDim)
@@ -59,41 +63,60 @@ void BaseChart::changeAxisTitles(Dimension sliceDim)
 	case U:
 		this->axis(Wt::Chart::XAxis_3D).setTitle("v");
 		this->axis(Wt::Chart::YAxis_3D).setTitle("w");
-		this->axis(Wt::Chart::ZAxis_3D).setTitle("z");
+		this->axis(Wt::Chart::ZAxis_3D).setTitle("F");
 		break;
 	case V:
 		this->axis(Wt::Chart::XAxis_3D).setTitle("u");
 		this->axis(Wt::Chart::YAxis_3D).setTitle("w");
-		this->axis(Wt::Chart::ZAxis_3D).setTitle("z");
+		this->axis(Wt::Chart::ZAxis_3D).setTitle("F");
 		break;
 	case W:
 		this->axis(Wt::Chart::XAxis_3D).setTitle("u");
 		this->axis(Wt::Chart::YAxis_3D).setTitle("v");
-		this->axis(Wt::Chart::ZAxis_3D).setTitle("z");
+		this->axis(Wt::Chart::ZAxis_3D).setTitle("F");
 		break;
 	default:
 		this->axis(Wt::Chart::XAxis_3D).setTitle("u");
 		this->axis(Wt::Chart::YAxis_3D).setTitle("v");
-		this->axis(Wt::Chart::ZAxis_3D).setTitle("w");
+		this->axis(Wt::Chart::ZAxis_3D).setTitle("F");
 		break;
 	}
 }
 
-void BaseChart::addScatterDataset(WAbstractItemModel *model, double min, double max)
+WScatterData* BaseChart::addVolumeDataset(VolumeData *model)
 {
 	this->clearDatasets();
 
 	WScatterData *scatter = new WScatterData(model);
-	//scatter->setPointSize(7);
 
-	WStandardColorMap *colorMap = new WStandardColorMap(min, max, true);
-	scatter->setColorMap(colorMap);
+	scatter->setColorMap(model->getColorMap());
+	//scatter->setPointSprite("diamond.png");
+
 	scatter->setColorColumn(3);
 	scatter->setSizeColumn(4);
 
 	this->addDataSeries(scatter);
 	scatter->setColorMapVisible(true);
 	scatter->setColorMapSide(Left);
+
+	return scatter;
+}
+
+void BaseChart::toggleColorMap(bool show)
+{
+	const std::vector<WAbstractDataSeries3D*> &vec = this->dataSeries();
+	if (vec.size())
+	{
+		vec[0]->setColorMapVisible(show);
+		if (show)
+		{
+			setBackground(WColor(210, 210, 210));
+		}
+		else
+		{
+			setBackground(WColor(110, 110, 110));
+		}
+	}
 }
 
 void BaseChart::setTopView()
@@ -166,5 +189,17 @@ void BaseChart::clearDatasets()
 }
 
 BaseChart::~BaseChart()
+{
+}
+
+///// PLANE CHART
+
+Plane2DChart::Plane2DChart(WContainerWidget *parent) : BaseChart(parent)
+{
+	//this->addStyleClass("disabled");
+	changeView(ViewType::TOP);
+}
+
+Plane2DChart::~Plane2DChart()
 {
 }

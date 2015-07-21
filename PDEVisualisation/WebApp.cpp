@@ -13,6 +13,8 @@ WebApp::WebApp(const WEnvironment& env) : WApplication(env)
 	this->setTheme(theme);
 	this->useStyleSheet("resources/style.css");
 
+	messageResourceBundle().use(appRoot() + "templates");
+
 	wrapper_ = new WContainerWidget(root());
 	root()->addStyleClass("container");
 

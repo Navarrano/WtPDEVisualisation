@@ -5,6 +5,7 @@
 #include <Wt/WRadioButton>
 #include <Wt/WButtonGroup>
 #include <Wt/WSlider>
+#include <Wt/WCheckBox>
 
 #include <boost/signals.hpp>
 
@@ -32,10 +33,13 @@ public:
 	virtual ~Chart3DPanel();
 private:
 	void initComponents();
+	void initChartLook();
+	void initEvents();
 
 	BaseChart* volumeChart_;
 	SettingsBox* settingsBox_;
 	VolumeData* volumeData_;
+	WScatterData* scatter_;
 };
 
 ////// SETTINGS BOX ////////
@@ -49,6 +53,7 @@ public:
 	boost::signal<void(VolumeSettings)>& changed() { return settingsChangedSignal_; };
 	boost::signal<void(Limits)>& clip();
 	virtual ~SettingsBox();
+	WCheckBox* getCheckBox() { return showColorMap_; };
 private:
 	void initComponenets();
 	void initEvents();
@@ -62,6 +67,7 @@ private:
 	ClippingGroupBox* clippingBox_;
 	WComboBox *general_;
 	WComboBox *skipped_;
+	WCheckBox *showColorMap_;
 	boost::signal<void(DisplayRate, DisplayRate, DisplayRate)> rateChangeSignal_;
 	boost::signal<void(VolumeSettings)> settingsChangedSignal_;
 };

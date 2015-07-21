@@ -161,7 +161,7 @@
     <ClCompile Include="InputPanel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models.cpp" />
-    <ClCompile Include="Plane2DChart.cpp" />
+    <ClCompile Include="PolynomialParser.cpp" />
     <ClCompile Include="SlicePickerWidget.cpp" />
     <ClCompile Include="ViewButtonsWidget.cpp" />
     <ClCompile Include="WebApp.cpp" />
@@ -172,9 +172,10 @@
     <ClInclude Include="Chart2DPanel.h" />
     <ClInclude Include="Chart3DPanel.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="infix_iterator.h" />
     <ClInclude Include="InputPanel.h" />
     <ClInclude Include="Models.h" />
-    <ClInclude Include="Plane2DChart.h" />
+    <ClInclude Include="PolynomialParser.h" />
     <ClInclude Include="SlicePickerWidget.h" />
     <ClInclude Include="ViewButtonsWidget.h" />
     <ClInclude Include="WebApp.h" />

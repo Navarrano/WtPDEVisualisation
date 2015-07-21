@@ -30,22 +30,19 @@ boost::any SurfaceData::data(const WModelIndex& index, int role) const
 	return points_[index.row() - 1][index.column() - 1].GetX();
 }
 
-//VolumeData::VolumeData(Matrix3D<Point1D> points, double xStart, double yStart, double zStart, double step, Limits limits, Wt::WObject *parent)
-//: WStandardItemModel(points.GetNumCols()*points.GetNumPols()*points.GetNumRows(), 5, parent), 
-//points_(points), xStart_(xStart), 
-//yStart_(yStart), zStart_(zStart), step_(step), min_(INT_MAX), max_(INT_MIN), xSize_(points.GetNumRows()), ySize_(points.GetNumCols()), zSize_(points.GetNumPols()),
-//xRate_(DisplayRate::Every), yRate_(DisplayRate::Every), zRate_(DisplayRate::Every), pointSize_(6), skippedPointSize_(1), limits_(limits)
-//{
-//	findMinAndMax();
-//	colorMap_ = new Chart::WStandardColorMap(min_, max_, true);
-//}
-
 VolumeData::VolumeData(ChartData& chartData, Wt::WObject *parent) : WStandardItemModel(chartData.totalNbPts, 5, parent), points_(chartData.points),
 xStart_(chartData.xStart), yStart_(chartData.yStart), zStart_(chartData.zStart), step_(chartData.step),
 min_(INT_MAX), max_(INT_MIN), xSize_(chartData.xSize), ySize_(chartData.ySize), zSize_(chartData.zSize),
 xRate_(DisplayRate::Every), yRate_(DisplayRate::Every), zRate_(DisplayRate::Every), pointSize_(6), skippedPointSize_(1), limits_(chartData)
 {
 	findMinAndMax();
+	
+	/*std::vector<Chart::WStandardColorMap::Pair> colors;
+	colors.push_back(Chart::WStandardColorMap::Pair(min_, WColor(49, 130, 189)));
+	colors.push_back(Chart::WStandardColorMap::Pair((min_ + max_) / 2.0, WColor(158, 202, 225)));
+	colors.push_back(Chart::WStandardColorMap::Pair(max_, WColor(222, 235, 247)));
+	colorMap_ = new Chart::WStandardColorMap(min_, max_, colors, true);*/
+
 	colorMap_ = new Chart::WStandardColorMap(min_, max_, true);
 }
 

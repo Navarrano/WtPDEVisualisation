@@ -3,16 +3,30 @@
 #include <Wt/WText>
 #include <Wt/WHBoxLayout>
 #include <Wt/WLabel>
+#include <Wt/WTemplate>
 
 #include "ViewButtonsWidget.h"
 
 
+WTemplate* preparseSingleRowFormTemplate(WFormWidget* input, std::string labelText, int labelColSize = 2, int labelOffset = 2, int inputColSize = 4)
+{
+	WTemplate* t = new WTemplate(WString::tr("single-row-form"));
+	t->bindWidget("input", input);
+	t->bindString("label", labelText);
+	t->bindInt("labelColSize", labelColSize);
+	t->bindInt("labelOffset", labelOffset);
+	t->bindInt("inputColSize", inputColSize);
 
-Chart3DPanel::Chart3DPanel(WContainerWidget *parent) : AbstractPanel("3D Volume Chart", parent)
+	return t;
+}
+
+
+Chart3DPanel::Chart3DPanel(WContainerWidget *parent) : AbstractPanel("3D Volume Chart", parent), scatter_(0)
 {
 	this->collapse();
 
 	initComponents();
+	initEvents();
 }
 
 void Chart3DPanel::initComponents()
@@ -22,9 +36,8 @@ void Chart3DPanel::initComponents()
 	WContainerWidget *settingsContainer = new WContainerWidget();
 
 	volumeChart_ = new BaseChart(chartContainer);
-	volumeChart_->resize(826, 826);
-	//volumeChart_->setBackground(WColor(235, 245, 223));
-	volumeChart_->setBackground(WColor(135, 135, 135));
+	initChartLook();
+
 	settingsBox_ = new SettingsBox(settingsContainer);
 
 	ViewButtonsWidget *viewButtons = new ViewButtonsWidget(chartContainer);
@@ -34,8 +47,11 @@ void Chart3DPanel::initComponents()
 	hbox->addWidget(settingsContainer, 1);
 
 	root()->setLayout(hbox);
+}
 
-	settingsBox_->changedRate().connect(std::bind([=](DisplayRate xRate, DisplayRate yRate, DisplayRate zRate ){
+void Chart3DPanel::initEvents()
+{
+	settingsBox_->changedRate().connect(std::bind([=](DisplayRate xRate, DisplayRate yRate, DisplayRate zRate){
 		volumeData_->setXRate(xRate);
 		volumeData_->setYRate(yRate);
 		volumeData_->setZRate(zRate);
@@ -55,6 +71,38 @@ void Chart3DPanel::initComponents()
 		volumeData_->setLimits(limits);
 		volumeChart_->updateChart(GLContext | GLTextures);
 	}, std::placeholders::_1));
+
+	settingsBox_->getCheckBox()->checked().connect(std::bind([=](){
+		volumeChart_->toggleColorMap(true);
+	}));
+	settingsBox_->getCheckBox()->unChecked().connect(std::bind([=](){
+		volumeChart_->toggleColorMap(false);
+	}));
+}
+
+void Chart3DPanel::initChartLook()
+{
+	volumeChart_->resize(826, 826);
+	volumeChart_->setBackground(WColor(210, 210, 210));
+	WFont labelFont = volumeChart_->axis(Axis::XAxis_3D).labelFont();
+	WFont titleFont = volumeChart_->axis(Axis::XAxis_3D).titleFont();
+	titleFont.setWeight(WFont::Bold);
+	labelFont.setSize(WFont::Medium);
+	titleFont.setSize(WFont::Large);
+
+	WPen textPen(WColor(232, 73, 12));
+
+	volumeChart_->axis(Axis::XAxis_3D).setLabelFont(labelFont);
+	volumeChart_->axis(Axis::XAxis_3D).setTitleFont(titleFont);
+	volumeChart_->axis(Axis::XAxis_3D).setTextPen(textPen);
+
+	volumeChart_->axis(Axis::YAxis_3D).setLabelFont(labelFont);
+	volumeChart_->axis(Axis::YAxis_3D).setTitleFont(titleFont);
+	volumeChart_->axis(Axis::YAxis_3D).setTextPen(textPen);
+
+	volumeChart_->axis(Axis::ZAxis_3D).setLabelFont(labelFont);
+	volumeChart_->axis(Axis::ZAxis_3D).setTitleFont(titleFont);
+	volumeChart_->axis(Axis::ZAxis_3D).setTextPen(textPen);
 }
 
 void Chart3DPanel::update(ChartData& chartData)
@@ -62,7 +110,7 @@ void Chart3DPanel::update(ChartData& chartData)
 	volumeData_ = new VolumeData(chartData, volumeChart_);
 
 	volumeChart_->clearDatasets();
-	volumeChart_->addScatterDataset(volumeData_, volumeData_->getMin(), volumeData_->getMax());
+	scatter_ = volumeChart_->addVolumeDataset(volumeData_);
 
 	settingsBox_->update(chartData);
 	AbstractPanel::update(chartData);
@@ -104,6 +152,11 @@ void SettingsBox::initComponenets()
 	skipped_->setDisabled(true);
 	initComboBox(skipped_, 0);
 	skippedLabel->setBuddy(skipped_);
+
+	new WText("<hr/>", this);
+
+	showColorMap_ = new WCheckBox("Show color map", this);
+	showColorMap_->setChecked(true);
 }
 
 void SettingsBox::initEvents()
@@ -121,10 +174,7 @@ void SettingsBox::initEvents()
 		settingsChangedSignal_(generateSettings());
 	}));
 	skipped_->changed().connect(std::bind([=](){
-		if (xRate_->getRate() != Every || yRate_->getRate() != Every || zRate_->getRate() != Every)
-		{
-			settingsChangedSignal_(generateSettings());
-		}
+		settingsChangedSignal_(generateSettings());
 	}));
 }
 
@@ -147,7 +197,7 @@ VolumeSettings SettingsBox::generateSettings()
 
 void SettingsBox::initComboBox(WComboBox* cb, int index)
 {
-	for (int i = 1; i <= 10; i++)
+	for (int i = 1; i <= 15; i++)
 	{
 		cb->addItem(std::to_string(i));
 	}
@@ -179,6 +229,7 @@ SettingsBox::~SettingsBox()
 	delete general_;
 	delete skipped_;
 	delete clippingBox_;
+	delete showColorMap_;
 }
 
 ////////////////// DISPLAY RADIO BUTTONS ////////////////////////
@@ -318,7 +369,7 @@ void ClippingAxisSliders::initEvents()
 	leftLimitSlider_->valueChanged().connect(std::bind([=](){
 		if (leftLimitSlider_->value() >= rightLimitSlider_->value())
 		{
-			leftLimitSlider_->setValue(rightLimitSlider_->value() - 1);
+			leftLimitSlider_->setValue(rightLimitSlider_->value());
 		}
 		leftLimitText_->setText(tickToTextValue(leftLimitSlider_->value()));
 	}));
@@ -326,7 +377,7 @@ void ClippingAxisSliders::initEvents()
 	rightLimitSlider_->valueChanged().connect(std::bind([=](){
 		if (leftLimitSlider_->value() >= rightLimitSlider_->value())
 		{
-			rightLimitSlider_->setValue(leftLimitSlider_->value() + 1);
+			rightLimitSlider_->setValue(leftLimitSlider_->value());
 		}
 		rightLimitText_->setText(tickToTextValue(rightLimitSlider_->value()));
 	}));

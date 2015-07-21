@@ -2,6 +2,8 @@
 
 #include <Wt/Chart/WCartesian3DChart>
 
+#include <string>
+
 Wt::WApplication *createApplication(const Wt::WEnvironment& env)
 {
 	return new WebApp(env);

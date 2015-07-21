@@ -36,6 +36,7 @@ public:
 	void setPointSize(short size) { pointSize_ = size; };
 	void setSkippedPointSize(short size) { skippedPointSize_ = size; };
 	void setLimits(Limits limits) { limits_ = limits; };
+	Chart::WStandardColorMap* getColorMap() { return colorMap_; };
 private:
 	void findMinAndMax();
 	bool checkXLimits(double x) const;

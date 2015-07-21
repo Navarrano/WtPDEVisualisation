@@ -32,5 +32,43 @@
 	float: left;
 }
 
+.limits-box {
+	margin-bottom: 10px;
+}
 
+.limits-box .form-group {
+	margin-left: 10px;
+	width: 200px;
+}
+
+.main-legend legend {
+	font-size: 23px;
+}
+
+.child-legend legend {
+	font-size: 19px;
+}
+
+.child-legend.limits .control-label {
+	width: 45px;
+}
+
+.child-legend.limits .form-inline {
+	padding-bottom: 15px;
+}
+
+.surfaces .control-label {
+	margin-right: 5px;
+	width: 45px;
+	text-align: right;
+}
+
+.surfaces .form-control {
+	text-indent: 44px;
+	width: 50%;
+}
+
+.surfaces {
+	padding-bottom: 15px;
+}
 

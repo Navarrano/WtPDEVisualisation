@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Plane2DChart.h"
+#include <Wt/Chart/WGridData>
+
+#include "BaseChart.h"
 #include "AbstractPanel.h"
 #include "SlicePickerWidget.h"
 
@@ -20,5 +22,8 @@ private:
 	BaseChart* surfaceChart_;
 	SlicePickerWidget* slicePicker_;
 	ChartData chartData_;
+	WGridData* gridData_;
+
+	WText* pointValues_;
 };
 
