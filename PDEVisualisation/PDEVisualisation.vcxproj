@@ -140,12 +140,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>F:\Program Files %28x86%29\Wt 3.3.4 msvs2013 x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>F:\Program Files %28x86%29\Wt 3.3.4 msvs2013 x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>wt.lib;wthttp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -158,6 +161,10 @@
     <ClCompile Include="BaseChart.cpp" />
     <ClCompile Include="Chart2DPanel.cpp" />
     <ClCompile Include="Chart3DPanel.cpp" />
+    <ClCompile Include="CustomEdits.cpp" />
+    <ClCompile Include="CustomGroupBoxes.cpp" />
+    <ClCompile Include="global_methods.cpp" />
+    <ClCompile Include="Validators.cpp" />
     <ClCompile Include="InputPanel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models.cpp" />
@@ -171,7 +178,11 @@
     <ClInclude Include="BaseChart.h" />
     <ClInclude Include="Chart2DPanel.h" />
     <ClInclude Include="Chart3DPanel.h" />
-    <ClInclude Include="headers.h" />
+    <ClInclude Include="CustomEdits.h" />
+    <ClInclude Include="CustomGroupBoxes.h" />
+    <ClInclude Include="global_methods.h" />
+    <ClInclude Include="Validators.h" />
+    <ClInclude Include="structures.h" />
     <ClInclude Include="infix_iterator.h" />
     <ClInclude Include="InputPanel.h" />
     <ClInclude Include="Models.h" />

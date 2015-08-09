@@ -6,6 +6,7 @@
 #include <Wt/WTemplate>
 
 #include "ViewButtonsWidget.h"
+#include "structures.h"
 
 
 WTemplate* preparseSingleRowFormTemplate(WFormWidget* input, std::string labelText, int labelColSize = 2, int labelOffset = 2, int inputColSize = 4)
@@ -118,8 +119,8 @@ void Chart3DPanel::update(ChartData& chartData)
 
 Chart3DPanel::~Chart3DPanel()
 {
-	delete volumeChart_;
-	delete settingsBox_;
+	my_delete(volumeChart_);
+	my_delete(settingsBox_);
 }
 
 ////////////////// SETTINGS BOX ////////////////////////
@@ -223,13 +224,13 @@ void SettingsBox::activateControls()
 
 SettingsBox::~SettingsBox() 
 {
-	delete xRate_;
-	delete yRate_;
-	delete zRate_;
-	delete general_;
-	delete skipped_;
-	delete clippingBox_;
-	delete showColorMap_;
+	my_delete(xRate_);
+	my_delete(yRate_);
+	my_delete(zRate_);
+	my_delete(general_);
+	my_delete(skipped_);
+	my_delete(clippingBox_);
+	my_delete(showColorMap_);
 }
 
 ////////////////// DISPLAY RADIO BUTTONS ////////////////////////
@@ -241,11 +242,11 @@ DisplayRadioButtons::DisplayRadioButtons(char* label, WContainerWidget *parent) 
 }
 DisplayRadioButtons::~DisplayRadioButtons()
 {
-	delete group_;
-	delete everyPoint_;
-	delete everySecondPoint_;
-	delete everyFifthPoint_;
-	delete everyTenthPoint_;
+	my_delete(group_);
+	my_delete(everyPoint_);
+	my_delete(everySecondPoint_);
+	my_delete(everyFifthPoint_);
+	my_delete(everyTenthPoint_);
 }
 
 void DisplayRadioButtons::initComponents(char* text)
@@ -395,10 +396,10 @@ WSlider* ClippingAxisSliders::initSlider()
 
 ClippingAxisSliders::~ClippingAxisSliders()
 {
-	delete leftLimitSlider_;
-	delete leftLimitText_;
-	delete rightLimitSlider_;
-	delete rightLimitText_;
+	my_delete(leftLimitSlider_);
+	my_delete(leftLimitText_);
+	my_delete(rightLimitSlider_);
+	my_delete(rightLimitText_);
 }
 
 //////// CLIPPING GROUP BOX ///////////
@@ -448,8 +449,8 @@ void ClippingGroupBox::update(ChartData& chartData)
 
 ClippingGroupBox::~ClippingGroupBox()
 {
-	delete uSliders_;
-	delete vSliders_;
-	delete wSliders_;
-	delete clip_;
+	my_delete(uSliders_);
+	my_delete(vSliders_);
+	my_delete(wSliders_);
+	my_delete(clip_);
 }

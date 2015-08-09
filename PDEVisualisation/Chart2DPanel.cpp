@@ -1,19 +1,13 @@
 #include "Chart2DPanel.h"
 #include "Models.h"
 #include "ViewButtonsWidget.h"
+#include "global_methods.h"
 
 #include <Wt/WText>
 #include <Wt/WVBoxLayout>
 #include <Wt/WHBoxLayout>
 #include <Wt/WLineEdit>
 #include <string>
-
-std::string doubleToString(const double val, short precision = 2)
-{
-	std::stringstream str;
-	str << std::fixed << std::setprecision(precision) << val;
-	return str.str();
-}
 
 Chart2DPanel::Chart2DPanel(WContainerWidget *parent) : AbstractPanel("Slice Chart", parent), gridData_(0)
 {
@@ -58,7 +52,7 @@ void Chart2DPanel::initComponents()
 			{
 				WSurfaceSelection surf = surfaces[0];
 				WString str("f({1},{2}) = {3}");
-				pointValues_->setText(str.arg(doubleToString(surf.x)).arg(doubleToString(surf.y)).arg(doubleToString(surf.z)));
+				pointValues_->setText(str.arg(toString(surf.x)).arg(toString(surf.y)).arg(toString(surf.z)));
 			}
 		}
 	}, std::placeholders::_1));
@@ -114,8 +108,8 @@ void Chart2DPanel::redrawCharts(Dimension dim, double value)
 
 Chart2DPanel::~Chart2DPanel()
 {
-	delete planeChart_;
-	delete surfaceChart_;
-	delete slicePicker_;
-	delete pointValues_;
+	my_delete(planeChart_);
+	my_delete(surfaceChart_);
+	my_delete(slicePicker_);
+	my_delete(pointValues_);
 }

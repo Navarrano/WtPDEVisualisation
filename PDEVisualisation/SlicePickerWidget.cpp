@@ -1,5 +1,7 @@
 #include "SlicePickerWidget.h"
 
+#include "structures.h"
+
 #include <Wt/WPushButton>
 #include <Wt/WHBoxLayout>
 
@@ -95,8 +97,8 @@ void SlicePickerWidget::update(ChartData chartData, int precision)
 
 SlicePickerWidget::~SlicePickerWidget()
 {
-	delete comboBox_;
-	delete spinBox_;
-	delete showButton_;
-	delete errorText_;
+	my_delete(comboBox_);
+	my_delete(spinBox_);
+	my_delete(showButton_);
+	my_delete(errorText_);
 }

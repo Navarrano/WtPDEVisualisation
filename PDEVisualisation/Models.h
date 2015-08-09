@@ -3,7 +3,7 @@
 
 #include "../PDESolver/PBspSurf.h"
 #include "../PDESolver/PBspVol.h"
-#include "headers.h"
+#include "structures.h"
 
 #include <Wt/WAbstractTableModel>
 #include <Wt/WStandardItemModel>

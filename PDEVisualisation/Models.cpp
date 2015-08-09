@@ -122,5 +122,5 @@ bool VolumeData::checkZLimits(double z) const
 
 VolumeData::~VolumeData()
 {
-	delete colorMap_;
+	my_delete(colorMap_);
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CHART_3D_PANEL_H
+#define CHART_3D_PANEL_H
 
 #include <Wt/WGroupBox>
 #include <Wt/WComboBox>
@@ -139,3 +140,5 @@ private:
 	WPushButton* clip_;
 	boost::signal<void(Limits)> clipButtonSignal_;
 };
+
+#endif

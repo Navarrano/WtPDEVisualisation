@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SLICE_PICKER_WIDGET_H
+#define SLICE_PICKER_WIDGET_H
 
 #include <Wt/WText>
 #include <Wt/WContainerWidget>
@@ -8,7 +9,7 @@
 
 #include <boost/signal.hpp>
 
-#include "headers.h"
+#include "structures.h"
 
 using namespace Wt;
 
@@ -31,3 +32,4 @@ private:
 	void updateSpinBox();
 };
 
+#endif

@@ -48,6 +48,18 @@
     <ClCompile Include="PolynomialParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Validators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomEdits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="global_methods.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomGroupBoxes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractPanel.h">
@@ -77,13 +89,25 @@
     <ClInclude Include="WebApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="infix_iterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PolynomialParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Validators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomEdits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global_methods.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomGroupBoxes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

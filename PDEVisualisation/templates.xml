@@ -1,0 +1,102 @@
+<messages>
+  <message id="surfaces-form">
+	<div class="form-inline col-sm-12 surfaces">
+		<div class="form-group col-sm-3 col-sm-offset-1">
+			<label class="control-label" for="${id:xSurface}">U: </label>${xSurface}
+	    </div>
+		<div class="form-group col-sm-3">
+			<label class="control-label" for="${id:ySurface}">V: </label>${ySurface}
+		</div>
+		<div class="form-group col-sm-3">
+			<label class="control-label" for="${id:zSurface}">W: </label>${zSurface}
+		</div>
+	 </div>
+  </message>	
+	
+	
+
+	
+  
+  <message id="limits-form">
+	<div class="form-inline">
+		<div class="form-inline col-sm-12">
+			<div class="form-group col-sm-3 col-sm-offset-1">
+				<label class="control-label" for="${id:leftX}">U<sub>min</sub>:</label>${leftX}
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label" for="${id:leftY}">V<sub>min</sub>:</label>${leftY}
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label" for="${id:leftZ}">W<sub>min</sub>:</label>${leftZ}
+			</div>
+		</div>
+	</div>
+		<div class="form-inline">
+		<div class="form-inline col-sm-12">
+			<div class="form-group col-sm-3 col-sm-offset-1">
+				<label class="control-label" for="${id:rightX}">U<sub>max</sub>:</label>${rightX}
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label" for="${id:rightY}">V<sub>max</sub>:</label>${rightY}
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label" for="${id:rightZ}">W<sub>max</sub>:</label>${rightZ}
+			</div>
+		</div>
+	</div>
+  </message>
+
+  <message id="boundaries-form">
+	<div class="form-horizontal">
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:xLeft}">${xLeftLabel}</label>
+		  <div class="col-sm-4">${xLeft}</div>
+	  </div>
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:xRight}">${xRightLabel}</label>
+		  <div class="col-sm-4">${xRight}</div>
+	  </div>
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:yLeft}">${yLeftLabel}</label>
+		  <div class="col-sm-4">${yLeft}</div>
+	  </div>
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:yRight}">${yRightLabel}</label>
+		  <div class="col-sm-4">${yRight}</div>
+	  </div>
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:zLeft}">${zLeftLabel}</label>
+		  <div class="col-sm-4">${zLeft}</div>
+	  </div>
+	  <div class="form-group">
+		  <label class="control-label col-sm-2 col-sm-offset-2" for="${id:zRight}">${zRightLabel}</label>
+		  <div class="col-sm-4">${zRight}</div>
+	  </div>
+	</div>
+  </message>
+  
+  <message id="rhs-form">
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2 col-sm-offset-2" for="${id:rhs}">&#8711;<sup>2</sup>F =</label>
+			<div class="col-sm-4">${rhs}</div>
+		</div>
+	</div>
+  </message>
+  <message id="density-form">
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-3 col-sm-offset-1" for="${id:density}">Number of points per chart unit: </label>
+			<div class="col-sm-4">${density}</div>
+		</div>
+	</div>
+  </message>
+  <message id="single-row-form">
+	<div class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-${labelColSize} col-sm-offset-${labelOffset}" for="${id:density}">${label} </label>
+			<div class="col-sm-${inputColSize}">${input}</div>
+		</div>
+	</div>
+  </message>
+</messages>

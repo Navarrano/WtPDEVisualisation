@@ -1,11 +1,9 @@
-#ifndef HEADERS_H
-#define HEADERS_H
+#ifndef STRUCTURES_H
+#define STRUCTURES_H
+
+#define my_delete(x) { delete x; x = NULL; }
 
 #include "../PDESolver/PBspVol.h"
-#include <sstream>
-#include <iomanip>
-
-
 
 struct ChartData
 {

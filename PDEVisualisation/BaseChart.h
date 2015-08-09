@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BASE_CHART_H
+#define BASE_CHART_H
 
 #include <Wt/WContainerWidget>
 #include <Wt/Chart/WCartesian3DChart>
@@ -6,7 +7,7 @@
 #include <Wt/Chart/WGridData>
 #include <Wt/Chart/WScatterData>
 
-#include "headers.h"
+#include "structures.h"
 #include "Models.h"
 
 using namespace Wt;
@@ -43,4 +44,6 @@ public:
 	Plane2DChart(WContainerWidget *parent = 0);
 	virtual ~Plane2DChart();
 };
+
+#endif
 

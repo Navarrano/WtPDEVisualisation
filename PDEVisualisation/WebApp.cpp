@@ -1,5 +1,7 @@
 #include "WebApp.h"
 
+#include "structures.h"
+
 #include <Wt/WBootstrapTheme>
 #include <Wt/WOverlayLoadingIndicator>
 #include <Wt/WText>
@@ -41,8 +43,8 @@ void WebApp::initComponents()
 
 WebApp::~WebApp()
 {
-	delete inputPanel_;
-	delete slicePanel_;
-	delete volumePanel_;
-	delete wrapper_;
+	my_delete(inputPanel_);
+	my_delete(slicePanel_);
+	my_delete(volumePanel_);
+	my_delete(wrapper_);
 }

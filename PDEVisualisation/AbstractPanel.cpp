@@ -18,5 +18,6 @@ AbstractPanel::AbstractPanel(std::string title, WContainerWidget* parent) : WPan
 
 AbstractPanel::~AbstractPanel()
 {
-	delete wrapper_;
+	//delete wrapper_;
+	my_delete(wrapper_);
 }

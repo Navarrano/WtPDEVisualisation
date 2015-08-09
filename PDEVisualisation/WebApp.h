@@ -1,4 +1,5 @@
-#pragma once
+#ifndef WEB_APP_H
+#define WEB_APP_H
 
 #include "InputPanel.h"
 #include "Chart2DPanel.h"
@@ -25,3 +26,4 @@ private:
 	void initComponents();
 };
 
+#endif

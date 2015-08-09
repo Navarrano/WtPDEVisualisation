@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CHART_2D_PANEL_H
+#define CHART_2D_PANEL_H
 
 #include <Wt/Chart/WGridData>
 
@@ -26,4 +27,6 @@ private:
 
 	WText* pointValues_;
 };
+
+#endif
 

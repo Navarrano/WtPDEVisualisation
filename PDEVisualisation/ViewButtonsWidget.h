@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VIEW_BUTTONS_WIDGET_H
+#define VIEW_BUTTONS_WIDGET_H
 
 #include "BaseChart.h"
 
@@ -23,5 +24,5 @@ private:
 	ViewSignal viewChangeSignal_;
 };
 
-
+#endif
 

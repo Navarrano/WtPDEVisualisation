@@ -1,5 +1,6 @@
 #include "ViewButtonsWidget.h"
 
+#include "structures.h"
 
 ViewButtonsWidget::ViewButtonsWidget(WContainerWidget* parent) : WContainerWidget(parent)
 {
@@ -24,8 +25,8 @@ ViewButtonsWidget::ViewButtonsWidget(WContainerWidget* parent) : WContainerWidge
 
 ViewButtonsWidget::~ViewButtonsWidget()
 {
-	delete perspectiveView_;
-	delete topView_;
-	delete sideView_;
-	delete frontView_;
+	my_delete(perspectiveView_);
+	my_delete(topView_);
+	my_delete(sideView_);
+	my_delete(frontView_);
 }

@@ -9,11 +9,9 @@
 
 #include <boost/signal.hpp>
 
-#include "headers.h"
+#include "structures.h"
 
 using namespace Wt;
-
-
 
 typedef boost::signal <void(ChartData)> CalcSignal;
 typedef boost::signal <void(FBspVol, ChartData)> ExtendedCalcSignal;
